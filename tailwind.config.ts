@@ -17,6 +17,10 @@ const config: Config = {
         "Night-Black": "#16161A",
         "Neon-Green": "#43E748",
         "Dark-Gray": "#666666",
+        "Dark-Blue": "#1F2028",
+        "Snow-White": "#FFFAFA",
+        "Blueberry-Blue": "#3b82f6",
+        "Blood-Red": "#A53441",
       },
       fontSize: {
         sm: "0.8rem",
