@@ -16,7 +16,9 @@ const Navbar: React.FC<{ openSidebar: () => void; isSideBarOpen: boolean }> = ({
         isSideBarOpen ? "pr-[250px]" : ""
       }`}>
       <div className="flex items-center">
-        <Image src="/logo.svg" alt="Logo" width={100} height={100} />
+        <Link href="/">
+          <Image src="/logo.svg" alt="Logo" width={100} height={100} />
+        </Link>
       </div>
       {/* Invisible for spacing evenly */}
       <div className="flex items-center opacity-0 md:flex hidden">
