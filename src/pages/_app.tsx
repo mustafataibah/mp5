@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Navbar openSidebar={toggleSidebar} isSideBarOpen={isSidebarOpen} />
-      <Sidebar isOpen={isSidebarOpen} closeSidebar={toggleSidebar} />
+      <Sidebar isOpen={isSidebarOpen} />
       <div className={`transition-all duration-300 ease-in-out ${isSidebarOpen ? `pr-[${sidebarWidth}]` : ""}`}>
         <Component {...pageProps} />
       </div>
