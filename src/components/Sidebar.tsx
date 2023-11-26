@@ -1,5 +1,5 @@
 import React from "react";
-import { ShoppingCart } from "react-feather";
+import { ShoppingCart, LogIn, User } from "react-feather";
 import Link from "next/link";
 
 type SidebarProps = {
@@ -14,23 +14,25 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
       } transition-transform duration-300 ease-in-out`}>
       <div className="flex flex-col justify-between items-center text-black h-full">
         <div className="mt-10">
-          <Link href="/">
-            <span className="flex items-center text-black ml-2 mb-4 cursor-pointer">Sign In</span>
+          <Link href="/auth">
+            <span className="flex items-center text-black -ml-2 mb-6 cursor-pointer hover:text-Blueberry-Blue">
+              <LogIn className="mr-2" /> Sign In
+            </span>
           </Link>
-          <Link href="/">
-            <span className="flex items-center text-black ml-2 mb-4 cursor-pointer hidden">Profile</span>
+          <Link href="/profile">
+            <span className="flex items-center text-black -ml-2 mb-6 cursor-pointer hover:text-Blueberry-Blue">
+              <User className="mr-2" /> Profile
+            </span>
           </Link>
           <Link href="/cart">
-            <span className="flex items-center text-black mb-4 cursor-pointer">
+            <span className="flex items-center text-black -ml-2 mb-6 cursor-pointer hover:text-Blueberry-Blue">
               <ShoppingCart className="mr-2" /> Cart
             </span>
           </Link>
         </div>
         <div className="mb-10">
           <Link href="/">
-            <span className="flex items-center text-black ml-2 cursor-pointer hidden hover:text-Blood-Red">
-              Sign Out
-            </span>
+            <span className="flex items-center text-black ml-2 cursor-pointer hover:text-Blood-Red">Sign Out</span>
           </Link>
         </div>
       </div>

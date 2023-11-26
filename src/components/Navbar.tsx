@@ -12,7 +12,7 @@ const Navbar: React.FC<{ openSidebar: () => void; isSideBarOpen: boolean }> = ({
 
   return (
     <div
-      className={`flex justify-between items-center mx-[72px] my-[20px] transition-all duration-300 ease-in-out ${
+      className={`sticky top-0 z-30 w-[100%] py-4 bg-Eerie-Black flex justify-between items-center px-[72px] transition-all duration-300 ease-in-out ${
         isSideBarOpen ? "pr-[250px]" : ""
       }`}>
       <div className="flex items-center">

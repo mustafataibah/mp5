@@ -20,6 +20,7 @@ const config: Config = {
         "Dark-Blue": "#1F2028",
         "Snow-White": "#FFFAFA",
         "Blueberry-Blue": "#3b82f6",
+        "Blackberry-Blue": "#1D4ED8",
         "Blood-Red": "#A53441",
       },
       fontSize: {

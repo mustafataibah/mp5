@@ -1,11 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/globals.css";
 import { AppProps } from "next/app";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
+import { useRouter } from "next/router";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isSidebarOpen, setIsSideBarOpen] = useState(false);
+  const router = useRouter();
+
+  // To close sidebar when navigating to another page
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setIsSideBarOpen(false);
+    };
+
+    router.events.on("routeChangeStart", handleRouteChange);
+
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+    };
+  }, [router.events]);
 
   const toggleSidebar = () => {
     setIsSideBarOpen(!isSidebarOpen);

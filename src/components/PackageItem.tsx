@@ -19,7 +19,9 @@ const PackageItem: React.FC<PackageItemProps> = ({ title, description, price, im
         <p className="text-Dark-Blue my-4">{description}</p>
         <div className="flex justify-between items-center mt-2">
           <p className="text-Dark-Blue">${price}</p>
-          <button className="bg-Blueberry-Blue text-white py-2 px-4 rounded-md hover:text-black">Add to Cart</button>
+          <button className="bg-Blueberry-Blue text-white py-2 px-4 rounded-md hover:bg-Blackberry-Blue">
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>
