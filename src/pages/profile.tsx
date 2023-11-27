@@ -1,6 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useMutation } from "@apollo/client";
+import { useUser } from "../lib/UserContext";
+import { UPDATE_PROFILE_MUTATION } from "../lib/queries";
 
 const ProfilePage: React.FC = () => {
+  const { user, updateUser } = useUser();
+
+  useEffect(() => {
+    if (user) {
+      setUserData({
+        email: user.email,
+        companyName: user.companyName,
+        companyCategory: user.companyCategory,
+        description: user.description,
+      });
+    }
+  }, [user]);
+
   const sectors = [
     "Technology",
     "Healthcare",
@@ -23,19 +39,58 @@ const ProfilePage: React.FC = () => {
   ];
 
   const [userData, setUserData] = useState({
-    email: "user@example.com",
+    email: "",
     companyName: "",
     companyCategory: "",
     description: "",
   });
 
+  const [updateProfile] = useMutation(UPDATE_PROFILE_MUTATION);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Profile Updated!");
+
+    if (!isFormValid()) {
+      alert("Please fill out all fields");
+      return;
+    }
+
+    if (!user || !user.id) {
+      return;
+    }
+
+    try {
+      const { data } = await updateProfile({
+        variables: {
+          userId: user.id,
+          companyName: userData.companyName,
+          companyDescription: userData.description,
+          companyCategory: userData.companyCategory,
+        },
+      });
+
+      alert("Profile updated successfully!");
+
+      if (data.updateProfile) {
+        updateUser({
+          ...user,
+          companyName: data.updateProfile.companyName,
+          description: data.updateProfile.companyDescription,
+          companyCategory: data.updateProfile.companyCategory,
+        });
+      }
+    } catch (error) {
+      console.error("Error updating profile", error);
+      alert("Failed to update profile.");
+    }
+  };
+
+  const isFormValid = () => {
+    return userData.companyName && userData.companyCategory && userData.description;
   };
 
   return (

@@ -9,7 +9,7 @@ const Shop: React.FC = () => {
   console.log("test", data);
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error</p>;
+  if (error) return <p>Back Soon!</p>;
 
   const packages = data.getProducts;
   return (

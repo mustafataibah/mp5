@@ -22,6 +22,32 @@ export const SIGN_UP_MUTATION = gql`
 
 export const SIGN_IN_MUTATION = gql`
   mutation SignIn($email: String!, $password: String!) {
-    signIn(email: $email, password: $password)
+    signIn(email: $email, password: $password) {
+      token
+      user {
+        id
+        email
+        companyName
+        companyDescription
+        companyCategory
+      }
+    }
+  }
+`;
+
+export const UPDATE_PROFILE_MUTATION = gql`
+  mutation UpdateProfile($userId: ID!, $companyName: String, $companyDescription: String, $companyCategory: String) {
+    updateProfile(
+      userId: $userId
+      companyName: $companyName
+      companyDescription: $companyDescription
+      companyCategory: $companyCategory
+    ) {
+      id
+      email
+      companyName
+      companyDescription
+      companyCategory
+    }
   }
 `;

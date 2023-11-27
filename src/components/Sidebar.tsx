@@ -2,6 +2,7 @@ import React from "react";
 import { ShoppingCart, LogIn, User } from "react-feather";
 import Link from "next/link";
 import { useUser } from "../lib/UserContext";
+import { useRouter } from "next/router";
 
 type SidebarProps = {
   isOpen: boolean;
@@ -9,9 +10,14 @@ type SidebarProps = {
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
   const { user, signOut } = useUser();
+  const router = useRouter();
+
   const handleSignOut = () => {
     signOut();
+    isOpen = false;
+    router.push("/");
   };
+
   return (
     <div
       className={`fixed top-0 right-0 h-full bg-Snow-White w-[250px] z-40 transform ${

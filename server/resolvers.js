@@ -3,7 +3,6 @@ const {
   getProduct,
   findUserByEmail,
   addUser,
-  User,
   updateProfile,
   addToCart,
   getCartItemsByUserId,

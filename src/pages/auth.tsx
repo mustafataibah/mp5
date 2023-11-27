@@ -36,6 +36,11 @@ const Auth: React.FC = () => {
       return;
     }
 
+    if (!validatePassword(password)) {
+      setError("Password must be at least 8 characters and at least 1 letter and 1 number");
+      return;
+    }
+
     if (isSignUp && password !== confirmPassword) {
       setError("Passwords do not match");
       return;
@@ -48,14 +53,28 @@ const Auth: React.FC = () => {
         await signUp({ variables: { email, password } });
 
         const { data } = await signIn({ variables: { email, password } });
-        if (userContext) {
-          userContext.signIn(data.signIn.token);
+        if (data.signIn.user) {
+          userContext.signIn(
+            data.signIn.token,
+            data.signIn.user.id,
+            data.signIn.user.email,
+            data.signIn.user.companyName,
+            data.signIn.user.companyCategory,
+            data.signIn.user.companyDescription
+          );
           router.push("/");
         }
       } else {
         const { data } = await signIn({ variables: { email, password } });
-        if (userContext) {
-          userContext.signIn(data.signIn.token);
+        if (data.signIn.user) {
+          userContext.signIn(
+            data.signIn.token,
+            data.signIn.user.id,
+            data.signIn.user.email,
+            data.signIn.user.companyName,
+            data.signIn.user.companyCategory,
+            data.signIn.user.companyDescription
+          );
           router.push("/");
         }
       }
