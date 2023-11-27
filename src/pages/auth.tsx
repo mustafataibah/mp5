@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ChevronLeft } from "react-feather";
 import Link from "next/link";
-import { SIGN_UP_MUTATION, SIGN_IN_MUTATION } from "../components/queries";
+import { SIGN_UP_MUTATION, SIGN_IN_MUTATION } from "../lib/queries";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useUser } from "../lib/UserContext";
@@ -46,6 +46,12 @@ const Auth: React.FC = () => {
     try {
       if (isSignUp) {
         await signUp({ variables: { email, password } });
+
+        const { data } = await signIn({ variables: { email, password } });
+        if (userContext) {
+          userContext.signIn(data.signIn.token);
+          router.push("/");
+        }
       } else {
         const { data } = await signIn({ variables: { email, password } });
         if (userContext) {

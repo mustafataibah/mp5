@@ -22,13 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "src/lib/**/*",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "src/components/queries.js"
-  ],
+  "include": ["next-env.d.ts", "src/lib/**/*", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/lib/queries.js"],
   "exclude": ["node_modules"]
 }

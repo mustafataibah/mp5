@@ -29,7 +29,7 @@ async function initializeDb() {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       title TEXT,
       description TEXT,
-      price REAL,
+      price REAL
     )
   `);
 
@@ -80,7 +80,6 @@ module.exports = {
   initializeDb,
   addUser,
   findUserByEmail,
-  getUser,
   getProducts,
   getProduct,
 };

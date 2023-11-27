@@ -1,4 +1,4 @@
-const { getProducts, getProduct, findUserByEmail, addUser, getUser } = require("./database");
+const { getProducts, getProduct, findUserByEmail, addUser, User } = require("./database");
 const bcrypt = require("bcrypt");
 const { generateToken } = require("./generateToken");
 const saltRounds = 10; // bcrypt
@@ -18,7 +18,7 @@ const resolvers = {
       return addUser(email, hashedPassword);
     },
 
-    logIn: async (_, { email, password }) => {
+    signIn: async (_, { email, password }) => {
       const user = await findUserByEmail(email);
       if (!user) {
         throw new Error("User not found");

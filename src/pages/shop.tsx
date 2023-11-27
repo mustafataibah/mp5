@@ -1,7 +1,7 @@
 import React from "react";
 import PackageItem from "../components/PackageItem";
 import { useQuery } from "@apollo/client";
-import { GET_PACKAGES } from "../components/queries";
+import { GET_PACKAGES } from "../lib/queries";
 
 const Shop: React.FC = () => {
   const { loading, error, data } = useQuery(GET_PACKAGES);
