@@ -51,3 +51,24 @@ export const UPDATE_PROFILE_MUTATION = gql`
     }
   }
 `;
+
+export const ADD_TO_CART_MUTATION = gql`
+  mutation AddToCart($userId: ID!, $productId: ID!) {
+    addToCart(userId: $userId, productId: $productId) {
+      id
+      userId
+      productId
+    }
+  }
+`;
+
+export const GET_CART_ITEMS_QUERY = gql`
+  query GetCartItems($userId: ID!) {
+    getCartItemsByUserId(userId: $userId) {
+      id
+      title
+      description
+      price
+    }
+  }
+`;

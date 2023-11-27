@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import CheckoutModal from "../components/CheckoutModal";
+import { GET_CART_ITEMS_QUERY } from "../lib/queries";
+import { useUser } from "../lib/UserContext";
+import { useQuery } from "@apollo/client";
 
 type Product = {
   id: string;
@@ -10,33 +13,21 @@ type Product = {
   price: number;
 };
 
-const cartItems: Product[] = [
-  {
-    id: "1",
-    title: "Package",
-    imageUrl: "/placeholder.jpg",
-    description: "Desc",
-    price: 299,
-  },
-  {
-    id: "2",
-    title: "Package",
-    imageUrl: "/placeholder.jpg",
-    description: "Desc",
-    price: 299,
-  },
-  {
-    id: "3",
-    title: "Package",
-    imageUrl: "/placeholder.jpg",
-    description: "Desc",
-    price: 299,
-  },
-];
-
 const Cart: React.FC = () => {
-  const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
+  const { user } = useUser();
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+
+  const { loading, error, data } = useQuery(GET_CART_ITEMS_QUERY, {
+    variables: { userId: user?.id },
+    skip: !user?.id,
+  });
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error</p>;
+
+  const cartItems = data?.getCartItemsByUserId || [];
+
+  const totalPrice = cartItems.reduce((total: number, item: Product) => total + item.price, 0);
 
   const handleCheckout = () => {
     setIsCheckoutOpen(true);
@@ -50,7 +41,7 @@ const Cart: React.FC = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-3xl text-Snow-White font-black my-4">Your Cart</h1>
       <div>
-        {cartItems.map((item) => (
+        {cartItems.map((item: Product) => (
           <div key={item.id} className="flex border-b py-2 items-center">
             <div className="flex-none w-48 px-2">
               <div className="my-2 relative" style={{ width: "150px", height: "150px" }}>

@@ -106,6 +106,11 @@ async function addToCart(userId, productId) {
   return getCartItem(cartId);
 }
 
+async function getCartItem(cartId) {
+  const db = await openDb();
+  return db.get("SELECT * FROM Cart WHERE id = ?", cartId);
+}
+
 async function getCartItemsByUserId(userId) {
   const db = await openDb();
   const query = `
