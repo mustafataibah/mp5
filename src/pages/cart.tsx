@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import CheckoutModal from "../components/CheckoutModal";
 
 type Product = {
   id: string;
@@ -35,6 +36,15 @@ const cartItems: Product[] = [
 
 const Cart: React.FC = () => {
   const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+
+  const handleCheckout = () => {
+    setIsCheckoutOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsCheckoutOpen(false);
+  };
 
   return (
     <div className="container mx-auto p-4">
@@ -52,15 +62,18 @@ const Cart: React.FC = () => {
               <p>{item.description}</p>
             </div>
             <div className="flex-none text-right">
-              <span className="text-lg font-semibold">${item.price.toFixed(2)}</span>
+              <span className="text-lg font-semibold">${item.price}</span>
             </div>
           </div>
         ))}
       </div>
       <div className="text-lg font-semibold my-4 text-right">Total: ${totalPrice.toFixed(2)}</div>
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded float-right">
+      <button
+        onClick={handleCheckout}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded float-right">
         Checkout
       </button>
+      <CheckoutModal cartItems={cartItems} isOpen={isCheckoutOpen} onClose={handleCloseModal} />
       {/* Padding Bottom */}
       <div className="h-[10vh]"></div>
     </div>

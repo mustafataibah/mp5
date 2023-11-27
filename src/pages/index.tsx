@@ -5,7 +5,7 @@ import Image from "next/image";
 const Home: React.FC = () => {
   return (
     <>
-      <div className="relative h-[90vh] w-screen flex flex-col items-center justify-center">
+      <div className="relative h-[94vh] w-screen flex flex-col items-center justify-center">
         <div className="absolute inset-0">
           <Image src="/shapes.svg" alt="" layout="fill" objectFit="contain" />
         </div>

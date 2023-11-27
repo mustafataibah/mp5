@@ -1,17 +1,77 @@
 import React, { useState } from "react";
 import { ChevronLeft } from "react-feather";
 import Link from "next/link";
+import { SIGN_UP_MUTATION, SIGN_IN_MUTATION } from "../components/queries";
+import { useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
+import { useUser } from "../lib/UserContext";
 
 const Auth: React.FC = () => {
+  const [signUp] = useMutation(SIGN_UP_MUTATION);
+  const [signIn] = useMutation(SIGN_IN_MUTATION);
   const [isSignUp, setIsSignUp] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const userContext = useUser();
+  const router = useRouter();
+
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /\S+@\S+\.\S+/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password: string): boolean => {
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    return passwordRegex.test(password);
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirmPassword = form.confirmPassword?.value;
+
+    if (!validateEmail(email)) {
+      setError("Invalid email format");
+      return;
+    }
+
+    if (isSignUp && password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    console.log("Attempting to sign in with:", email, password);
+
+    try {
+      if (isSignUp) {
+        await signUp({ variables: { email, password } });
+      } else {
+        const { data } = await signIn({ variables: { email, password } });
+        if (userContext) {
+          userContext.signIn(data.signIn.token);
+          router.push("/");
+        }
+      }
+      setError(null);
+    } catch (error) {
+      if (error instanceof Error) {
+        if (error.message.includes("email already taken")) {
+          setError("Email already taken");
+        } else if (error.message.includes("incorrect username or password")) {
+          setError("Incorrect username or password");
+        } else {
+          setError(error.message);
+        }
+      } else {
+        setError("An unexpected error occurred");
+      }
+    }
+  };
 
   const toggleForm = () => {
     setIsSignUp(!isSignUp);
-  };
-
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    alert(isSignUp ? "Signing up..." : "Signing in...");
+    setError(null);
   };
 
   return (
@@ -78,6 +138,8 @@ const Auth: React.FC = () => {
               />
             </div>
           )}
+
+          {error && <div className="mb-4 text-center text-red-600">{error}</div>}
 
           <button
             type="submit"

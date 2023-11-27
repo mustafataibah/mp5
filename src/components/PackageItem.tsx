@@ -10,7 +10,7 @@ type PackageItemProps = {
 
 const PackageItem: React.FC<PackageItemProps> = ({ title, description, price, imageUrl }) => {
   return (
-    <div className="flex flex-col bg-Dark-Blue rounded-3xl overflow-hidden w-[25%] m-4">
+    <div className="flex flex-col bg-Dark-Blue rounded-3xl overflow-hidden w-[30%] m-4">
       <div className="w-full h-80 relative">
         <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" />
       </div>
