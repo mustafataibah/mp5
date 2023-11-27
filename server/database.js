@@ -34,12 +34,25 @@ async function initializeDb() {
   `);
 
   await db.exec(`
-    CREATE TABLE IF NOT EXISTS Users (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      email TEXT UNIQUE,
-      password TEXT
-    );
-  `);
+  CREATE TABLE IF NOT EXISTS Users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT UNIQUE,
+    password TEXT,
+    companyName TEXT,
+    companyDescription TEXT,
+    companyCategory TEXT
+  );
+`);
+
+  await db.exec(`
+  CREATE TABLE IF NOT EXISTS Cart (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    userId INTEGER,
+    productId INTEGER,
+    FOREIGN KEY(userId) REFERENCES Users(id),
+    FOREIGN KEY(productId) REFERENCES Product(id)
+  );
+`);
 
   for (const product of predefinedProducts) {
     await db.run("INSERT INTO Product (title, description, price) VALUES (?, ?, ?)", [
@@ -63,7 +76,46 @@ async function findUserByEmail(email) {
 
 async function getUser(id) {
   const db = await openDb();
-  return db.get("SELECT id, email FROM Users WHERE id = ?", id);
+  return db.get("SELECT id, email, companyName, companyDescription, companyCategory FROM Users WHERE id = ?", id);
+}
+
+async function updateProfile(userId, companyName, companyDescription, companyCategory) {
+  const db = await openDb();
+  await db.run(
+    `UPDATE Users
+     SET companyName = ?, companyDescription = ?, companyCategory = ?
+     WHERE id = ?`,
+    companyName,
+    companyDescription,
+    companyCategory,
+    userId
+  );
+  return getUser(userId);
+}
+
+async function addToCart(userId, productId) {
+  const db = await openDb();
+  const result = await db.run(
+    `
+    INSERT INTO Cart (userId, productId)
+    VALUES (?, ?)`,
+    userId,
+    productId
+  );
+  const cartId = result.lastID;
+  return getCartItem(cartId);
+}
+
+async function getCartItemsByUserId(userId) {
+  const db = await openDb();
+  const query = `
+    SELECT p.id, p.title, p.description, p.price
+    FROM Cart c
+    JOIN Product p ON c.productId = p.id
+    WHERE c.userId = ?
+  `;
+  const products = await db.all(query, userId);
+  return products;
 }
 
 async function getProducts() {
@@ -80,6 +132,9 @@ module.exports = {
   initializeDb,
   addUser,
   findUserByEmail,
+  updateProfile,
+  addToCart,
+  getCartItemsByUserId,
   getProducts,
   getProduct,
 };

@@ -1,12 +1,23 @@
-const { getProducts, getProduct, findUserByEmail, addUser, User } = require("./database");
+const {
+  getProducts,
+  getProduct,
+  findUserByEmail,
+  addUser,
+  User,
+  updateProfile,
+  addToCart,
+  getCartItemsByUserId,
+} = require("./database");
 const bcrypt = require("bcrypt");
 const { generateToken } = require("./generateToken");
+const { get } = require("http");
 const saltRounds = 10; // bcrypt
 
 const resolvers = {
   Query: {
     getProducts: () => getProducts(),
     getProduct: (_, { id }) => getProduct(id),
+    getCartItemsByUserId: (_, { userId }) => getCartItemsByUserId(userId),
   },
   Mutation: {
     signUp: async (_, { email, password }) => {
@@ -30,7 +41,13 @@ const resolvers = {
       }
 
       const token = generateToken(user);
-      return token;
+      return { token, user };
+    },
+    updateProfile: async (_, { userId, companyName, companyDescription, companyCategory }) => {
+      return updateProfile(userId, companyName, companyDescription, companyCategory);
+    },
+    addToCart: async (_, { userId, productId }) => {
+      return addToCart(userId, productId);
     },
   },
 };
