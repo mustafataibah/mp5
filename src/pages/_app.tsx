@@ -13,7 +13,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [isSidebarOpen, setIsSideBarOpen] = useState(false);
   const router = useRouter();
 
-  // To close sidebar when navigating to another page
   useEffect(() => {
     const handleRouteChange = () => {
       setIsSideBarOpen(false);

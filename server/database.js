@@ -3,14 +3,29 @@ const { open } = require("sqlite");
 
 const predefinedProducts = [
   {
-    title: "Package 1",
-    description: "Desc",
-    price: 100.0,
+    title: "FrontEnd Development",
+    description: "Developing the front end of the website",
+    price: 99,
   },
   {
-    title: "Package 2",
-    description: "Desc",
-    price: 200.0,
+    title: "FullStack Development",
+    description: "Developing the front end and back end of the website",
+    price: 299,
+  },
+  {
+    title: "UI/UX Design",
+    description: "Designing the front end of the website",
+    price: 499,
+  },
+  {
+    title: "Basic Package",
+    description: "UI/UX Design + FullStack Development",
+    price: 999,
+  },
+  {
+    title: "Premium Package",
+    description: "Market Research + Product Development + UI/UX Design + FullStack Development",
+    price: 1999,
   },
 ];
 

@@ -10,7 +10,7 @@ const {
 const bcrypt = require("bcrypt");
 const { generateToken } = require("./generateToken");
 const { get } = require("http");
-const saltRounds = 10; // bcrypt
+const saltRounds = 10;
 
 const resolvers = {
   Query: {

@@ -65,7 +65,6 @@ const Cart: React.FC = () => {
         Checkout
       </button>
       <CheckoutModal cartItems={cartItems} isOpen={isCheckoutOpen} onClose={handleCloseModal} />
-      {/* Padding Bottom */}
       <div className="h-[10vh]"></div>
     </div>
   );

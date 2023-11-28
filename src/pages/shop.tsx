@@ -40,7 +40,6 @@ const Shop: React.FC = () => {
           <PackageItem key={pkg.id} {...pkg} onAddToCart={() => handleAddToCart(pkg.id)} />
         ))}
       </div>
-      {/* Padding Bottom */}
       <div className="h-[10vh]"></div>
     </div>
   );
