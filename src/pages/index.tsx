@@ -50,18 +50,16 @@ const Home: React.FC = () => {
         </div>
 
         <div className="flex flex-col items-center z-10">
-          <h1 className="text-center text-white font-bold leading-none text-[30px] sm:text-[46px] md:text-6xl lg:text-7xl xl:text-8xl">
-            Imagination fueled {""}
+          <div className="text-center text-white font-bold leading-none text-[30px] sm:text-[46px] md:text-6xl lg:text-7xl xl:text-8xl">
             <span>
-              by
-              <div>
-                <Image src="/line.svg" alt="" layout="fixed" width={400} height={20} className="sm:flex hidden w-1/3" />
-              </div>
+              Imagination fueled by <br /> innovation
             </span>
-          </h1>
-          <h1 className="text-center text-white font-bold leading-none text-[30px] sm:text-[46px] md:text-6xl lg:text-7xl xl:text-8xl">
-            innovation
-          </h1>
+            <div className="flex justify-center w-full mt-2">
+              <div className="w-1/2 sm:flex hidden md:w-1/2 lg:w-1/2">
+                <Image src="/line.svg" alt="" layout="intrinsic" width={400} height={20} />
+              </div>
+            </div>
+          </div>
         </div>
 
         <button
@@ -74,7 +72,7 @@ const Home: React.FC = () => {
       <div ref={scrollRef} className="flex flex-col justify-around bg-Eerie-Black py-8 h-[90vh]">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center">
           <div className="w-full md:w-1/2 mb-4 md:mb-0 flex justify-center">
-            <Image src="/placeholder.jpg" alt="About Us" width={500} height={300} />
+            <Image src="/aboutUs.png" alt="About Us" width={500} height={300} className="rounded-3xl" />
           </div>
           <div className="md:w-1/2 text-left">
             <h2 className="text-2xl md:text-3xl font-bold mb-4 mx-4">About Us</h2>
@@ -89,10 +87,10 @@ const Home: React.FC = () => {
         <div className="flex flex-col px-4 text-center">
           <h2 className="text-2xl md:text-3xl font-bold my-8 md:mb-20">Proud to have worked with</h2>
           <div className="flex flex-wrap justify-around items-center gap-4 mb-16">
-            <Image src="/placeholder.jpg" alt="Partner 1" width={175} height={175} />
-            <Image src="/placeholder.jpg" alt="Partner 2" width={175} height={175} />
-            <Image src="/placeholder.jpg" alt="Partner 3" width={175} height={175} />
-            <Image src="/placeholder.jpg" alt="Partner 4" width={175} height={175} />
+            <Image src="/Misk.jpg" alt="Partner 1" width={175} height={175} />
+            <Image src="/BUSpark.png" alt="Partner 2" width={175} height={175} />
+            <Image src="/BUild.jpg" alt="Partner 3" width={175} height={175} />
+            <Image src="/BU.png" alt="Partner 4" width={175} height={175} />
           </div>
         </div>
       </div>
