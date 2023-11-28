@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Introduction
 
-First, run the development server:
+This README outlines the steps to run and test this web application built using TypeScript React, Tailwind CSS, Next.js, Apollo, Graphql, and SQLite3
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Prerequisites
+
+Before proceeding, ensure you have Node.js and npm installed
+
+## Setting up the project
+
+1. **Clone the repository**
+2. **Install Dependencies**
+
+## Running the Development Server
+
+1. Start the frontned: 
+    - in root directory run : 
+    ```bash
+     npm run dev
+     ```
+
+2. **Start the Backend Server**:
+   - Open a new terminal window and navigate to the server directory:
+     ```bash
+     cd server
+     ```
+   - Start the server using Node.js:
+     ```bash
+     node index.js
+     ```
+
+
+## Accessing Apollo Server
+- Once the servers are running, you can access the Apollo server at `http://localhost:4000`.
+- Here, you can run GraphQL queries and mutations.
+
+
+## Mutations
+
+ ```bash
+mutation SignUp {
+  signUp(email: "test@gmail.com", password: "test1234") {
+    id
+    email
+  }
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ ```bash
+mutation {
+  signIn(email: "test@gmail.com" , password: "password123") {
+    token
+    user {
+      id
+      email
+      companyName
+      companyDescription
+      companyCategory
+    }
+  }
+}
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+ ```bash
+mutation UpdateProfile {
+  updateProfile(
+    userId: 1
+    companyName: "Example"
+    companyDescription: "Example"
+    companyCategory: "Technology"
+  ) {
+    id
+    email
+    companyName
+    companyDescription
+    companyCategory
+  }
+}
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+ ```bash
+mutation AddToCart {
+  addToCart(userId: 1, productId: 1) {
+    id
+    userId
+    productId
+  }
+}
+```
 
-## Learn More
+## Queries
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+ ```bash
+query GetCartItemsByUserId {
+  getCartItemsByUserId(userId: 1) {
+    id
+    title
+    description
+    price
+  }
+}
+```
