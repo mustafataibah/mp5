@@ -14,7 +14,7 @@ const config: Config = {
       },
       colors: {
         "Eerie-Black": "#141414",
-        "Night-Black": "#16161A",
+        "Night-Black": "#253237",
         "Neon-Green": "#43E748",
         "Dark-Gray": "#666666",
         "Dark-Blue": "#1F2028",

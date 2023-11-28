@@ -94,9 +94,9 @@ const ProfilePage: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-black mb-4">Your Profile</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="container mx-auto p-4 md:px-10 lg:px-20 xl:px-40">
+      <h1 className="text-3xl font-black mb-4 text-center sm:text-left">Your Profile</h1>
+      <form onSubmit={handleSubmit} className="max-w-md mx-auto sm:max-w-lg md:max-w-xl">
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">Email</label>
           <input

@@ -1,29 +1,37 @@
 import React from "react";
-import { ShoppingCart, LogIn, User } from "react-feather";
+import { ShoppingCart, LogIn, User, X } from "react-feather";
 import Link from "next/link";
 import { useUser } from "../lib/UserContext";
 import { useRouter } from "next/router";
 
 type SidebarProps = {
   isOpen: boolean;
+  setIsSideBarOpen: (isOpen: boolean) => void;
 };
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsSideBarOpen }) => {
   const { user, signOut } = useUser();
   const router = useRouter();
 
   const handleSignOut = () => {
     signOut();
-    isOpen = false;
+    setIsSideBarOpen(false);
     router.push("/");
+  };
+
+  const handleClose = () => {
+    setIsSideBarOpen(false);
   };
 
   return (
     <div
-      className={`fixed top-0 right-0 h-full bg-Snow-White w-[250px] z-40 transform ${
-        isOpen ? "translate-x-0" : "translate-x-full"
-      } transition-transform duration-300 ease-in-out`}>
+      className={`fixed top-0 right-0 h-full bg-Snow-White z-40 transform ${
+        isOpen ? "translate-x-0 opacity-100 pointer-events-auto" : "translate-x-full opacity-0 pointer-events-none"
+      } transition-all duration-300 ease-in-out w-full sm:w-[250px]`}>
       <div className="flex flex-col justify-between items-center text-black h-full">
+        <button className="absolute top-4 right-4 sm:hidden" onClick={handleClose}>
+          <X className="text-black" />
+        </button>
         <div className="mt-10">
           {user ? (
             <>

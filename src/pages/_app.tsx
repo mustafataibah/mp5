@@ -8,6 +8,7 @@ import { ApolloProvider } from "@apollo/client";
 import client from "../lib/apollo";
 import { UserProvider } from "../lib/UserContext";
 import { CartProvider } from "../lib/CartContext";
+import Footer from "../components/Footer";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isSidebarOpen, setIsSideBarOpen] = useState(false);
@@ -36,10 +37,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       <UserProvider>
         <ApolloProvider client={client}>
           <Navbar openSidebar={toggleSidebar} isSideBarOpen={isSidebarOpen} />
-          <Sidebar isOpen={isSidebarOpen} />
+          <Sidebar isOpen={isSidebarOpen} setIsSideBarOpen={setIsSideBarOpen} />
           <div className={`transition-all duration-300 ease-in-out ${isSidebarOpen ? `pr-[${sidebarWidth}]` : ""}`}>
             <Component {...pageProps} />
           </div>
+          <Footer />
         </ApolloProvider>
       </UserProvider>
     </CartProvider>

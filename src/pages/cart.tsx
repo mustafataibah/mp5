@@ -8,7 +8,6 @@ import { useQuery } from "@apollo/client";
 type Product = {
   id: string;
   title: string;
-  imageUrl: string;
   description: string;
   price: number;
 };
@@ -45,7 +44,13 @@ const Cart: React.FC = () => {
           <div key={item.id} className="flex border-b py-2 items-center">
             <div className="flex-none w-48 px-2">
               <div className="my-2 relative" style={{ width: "150px", height: "150px" }}>
-                <Image src={item.imageUrl} alt={item.title} layout="fill" objectFit="cover" className="rounded-lg" />
+                {/* <Image
+                  src="placeholder.jpg"
+                  alt={item.title}
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-lg"
+                /> */}
               </div>
             </div>
             <div className="flex-grow px-4">
