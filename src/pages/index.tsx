@@ -37,11 +37,6 @@ const Home: React.FC = () => {
     }
   };
 
-  // Not good very fast no good user experience
-  // const scroll = () => {
-  //   scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-  // };
-
   return (
     <>
       <div className="relative h-[94vh] w-full flex flex-col items-center justify-center overflow-x-hidden">

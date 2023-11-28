@@ -20,7 +20,6 @@ const Navbar: React.FC<{ openSidebar: () => void; isSideBarOpen: boolean }> = ({
           <Image src="/logo.svg" alt="Logo" width={100} height={100} />
         </Link>
       </div>
-      {/* Invisible for spacing evenly */}
       <div className="flex items-center opacity-0 md:flex hidden">
         <Image src="/logo.svg" alt="Invisible Spacer" width={100} height={100} />
       </div>

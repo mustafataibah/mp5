@@ -35,9 +35,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsSideBarOpen }) => {
         <div className="mt-10">
           {user ? (
             <>
-              {/* <div className="mb-6 text-center">
-                Welcome <span className="font-bold">{user.email}</span>
-              </div> */}
               <Link href="/profile">
                 <span className="flex items-center text-black -ml-2 mb-6 cursor-pointer hover:text-Blueberry-Blue">
                   <User className="mr-2" /> Profile
