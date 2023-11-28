@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { ApolloProvider } from "@apollo/client";
 import client from "../lib/apollo";
 import { UserProvider } from "../lib/UserContext";
+import { CartProvider } from "../lib/CartContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isSidebarOpen, setIsSideBarOpen] = useState(false);
@@ -32,15 +33,17 @@ function MyApp({ Component, pageProps }: AppProps) {
   const sidebarWidth = "250px";
 
   return (
-    <UserProvider>
-      <ApolloProvider client={client}>
-        <Navbar openSidebar={toggleSidebar} isSideBarOpen={isSidebarOpen} />
-        <Sidebar isOpen={isSidebarOpen} />
-        <div className={`transition-all duration-300 ease-in-out ${isSidebarOpen ? `pr-[${sidebarWidth}]` : ""}`}>
-          <Component {...pageProps} />
-        </div>
-      </ApolloProvider>
-    </UserProvider>
+    <CartProvider>
+      <UserProvider>
+        <ApolloProvider client={client}>
+          <Navbar openSidebar={toggleSidebar} isSideBarOpen={isSidebarOpen} />
+          <Sidebar isOpen={isSidebarOpen} />
+          <div className={`transition-all duration-300 ease-in-out ${isSidebarOpen ? `pr-[${sidebarWidth}]` : ""}`}>
+            <Component {...pageProps} />
+          </div>
+        </ApolloProvider>
+      </UserProvider>
+    </CartProvider>
   );
 }
 

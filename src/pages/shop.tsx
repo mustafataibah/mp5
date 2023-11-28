@@ -3,11 +3,13 @@ import PackageItem from "../components/PackageItem";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_PACKAGES, ADD_TO_CART_MUTATION } from "../lib/queries";
 import { useUser } from "../lib/UserContext";
+import { useCart } from "../lib/CartContext";
 
 const Shop: React.FC = () => {
   const { loading, error, data } = useQuery(GET_PACKAGES);
   const [addToCart] = useMutation(ADD_TO_CART_MUTATION);
   const { user } = useUser();
+  const { addToCart: addToCartContext } = useCart();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Back Soon!</p>;
@@ -16,12 +18,15 @@ const Shop: React.FC = () => {
 
   const handleAddToCart = async (productId: string) => {
     if (!user) {
-      console.log("User not logged in");
       return;
     }
     try {
-      await addToCart({ variables: { userId: user.id, productId } });
-      console.log("Added to cart");
+      const { data } = await addToCart({ variables: { userId: user.id, productId } });
+
+      if (data.addToCart) {
+        addToCartContext(data.addToCart);
+        alert("Added to cart!");
+      }
     } catch (err) {
       console.error("Error adding to cart", err);
     }
