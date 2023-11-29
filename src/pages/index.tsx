@@ -64,7 +64,7 @@ const Home: React.FC = () => {
         </button>
       </div>
 
-      <div ref={scrollRef} className="flex flex-col justify-around bg-Eerie-Black py-8 h-[90vh]">
+      <div ref={scrollRef} className="flex flex-col bg-Eerie-Black py-8 h-fill">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center">
           <div className="w-full md:w-1/2 mb-4 md:mb-0 flex justify-center">
             <Image src="/aboutUs.png" alt="About Us" width={500} height={300} className="rounded-3xl" />
