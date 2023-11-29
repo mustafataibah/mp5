@@ -39,7 +39,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <div className="relative h-[94vh] w-full flex flex-col items-center justify-center overflow-x-hidden">
+      <div className="relative h-fill min-h-[94vh] w-full flex flex-col items-center justify-center overflow-x-hidden">
         <div className="absolute inset-0">
           <Image src="/shapes.svg" alt="" layout="fill" objectFit="contain" />
         </div>
@@ -64,7 +64,7 @@ const Home: React.FC = () => {
         </button>
       </div>
 
-      <div ref={scrollRef} className="flex flex-col bg-Eerie-Black py-8 h-fill">
+      <div ref={scrollRef} className="flex flex-col bg-Eerie-Black py-8 h-fill min-h-[94vh]">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center">
           <div className="w-full md:w-1/2 mb-4 md:mb-0 flex justify-center">
             <Image src="/aboutUs.png" alt="About Us" width={500} height={300} className="rounded-3xl" />

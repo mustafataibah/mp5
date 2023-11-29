@@ -100,7 +100,7 @@ const Auth: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-[90vh]">
+    <div className="flex justify-center items-center h-fill min-h-[94vh]">
       <div className="bg-white p-6 rounded-lg shadow-lg w-96 h-fill">
         <div className="flex text-black items-center mb-4">
           <Link href="/">

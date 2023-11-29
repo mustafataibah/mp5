@@ -37,7 +37,7 @@ const Cart: React.FC = () => {
   };
 
   return (
-    <div className="container h-[94vh] mx-auto p-4">
+    <div className="container h-fill min-h-[94vh] mx-auto p-4">
       <h1 className="text-3xl text-Snow-White font-black my-4">Your Cart</h1>
       <div>
         {cartItems.map((item: Product) => (
